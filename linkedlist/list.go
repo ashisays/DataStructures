@@ -17,6 +17,19 @@ func (head *Node) show(){
   fmt.Println("")
 }
 
+func (head *Node) find_cycle() bool {
+  slow_p := head
+  fast_p := head
+  for slow_p != nil && fast_p != nil && fast_p.next != nil{
+    slow_p = slow_p.next
+    fast_p = fast_p.next.next
+    if slow_p == fast_p{
+      return true
+    }
+  }
+  return false
+}
+
 func (head *Node) insert(val int){
   temp := head
   for temp.next != nil{

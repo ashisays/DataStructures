@@ -35,3 +35,14 @@ func TestIntersection(t *testing.T) {
 }
 
 
+func TestLoop(t *testing.T) {
+    head := Node{val:1}
+    for i:=1; i < 5; i++{
+      head.insert(i+1)
+    }
+    fmt.Printf("The loop in  node is  :%v\n",head.find_cycle())
+    head.append(&head)
+    fmt.Printf("The loop in  node is  :%v",head.find_cycle())
+}
+
+
