@@ -48,3 +48,38 @@ func (heap *Heap) Show() []int {
 func (heap *Heap) GetSize() int {
   return heap.HeapSize
 }
+
+func (heap *Heap) GetMaximum () int {
+  return heap.Array[1]
+}
+
+func (heap *Heap) HeapExtractMax() (int,int) {
+  if heap.HeapSize <1 {
+    return 0,1
+  }
+
+  max := heap.Array[1]
+  heap.Array[1] = heap.Array[heap.HeapSize-1] 
+  heap.HeapSize--
+  heap.MaxHeapify(1)
+  return max,0
+}
+
+func (heap *Heap) IncreaseKey(i int,v int) int{
+  if i< heap.HeapSize {
+    heap.Array[i] =v
+    for i>0 && heap.Array[Parent(i)] < heap.Array[i] {
+      heap.Array[i],heap.Array[Parent(i)] = heap.Array[Parent(i)],heap.Array[i]
+      i = Parent(i) 
+    }   
+  } else {
+    return 1
+  }
+  return 0
+}
+
+func (heap *Heap) Insert(v int) {
+  heap.HeapSize++
+  heap.Array = append(heap.Array,v)
+  heap.IncreaseKey(heap.HeapSize-1, v)
+}
